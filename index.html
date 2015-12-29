@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>Not sure yet...</title>
         <style>
             *, *::after, *::before {
@@ -17,24 +18,67 @@
                 justify-content: center;
                 align-items: center;
                 margin: 0px;
+
+                color: #288B8E;
+                background-color: #062329;
+                font-weight: bold;
+                font-size: 1.5em;
+            }
+
+            #frames pre {
+                display: none;
             }
         </style>
     </head>
     <body>
-        <marquee>
-    <pre>
+    <section id="frames">
+        <pre id="frame_1">
  (•_•)
 <)   )/  all the single ladies
  /   \
-
+        </pre>
+        <pre id="frame_2">
  ( •_•)
 \(   (>  all the single ladies
  /   \
+        </pre>
 
+        <pre id="frame_3">
  (•_•)
-<)   )/  oh oh oh
+<)   )/  oh oh oh             
  /   \
-    </pre>
-    </marquee>
+        </pre>
+    </section>
+
+    <script type="text/javascript">
+        var currentFrame = 0,
+            frames = [].slice.call(document.querySelectorAll('#frames pre'))
+
+        function hideFrames () {
+            frames.forEach(function (frameDOM) {
+                frameDOM.style.display = 'none'
+            })
+        }
+
+        function displayFrame (n) {
+            hideFrames()
+
+            if (n >= frames.length) {
+                currentFrame = 0
+                n = currentFrame
+            }
+
+            var frame = document.querySelector('#frame_' + (n + 1))
+            if (frame) {
+                frame.style.display = 'block'
+            }
+
+            setTimeout(function () {
+                displayFrame(++currentFrame)
+            }, 2000)
+        }
+
+        displayFrame(currentFrame)
+    </script>
     </body>
 </html>
